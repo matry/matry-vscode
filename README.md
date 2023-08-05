@@ -1,10 +1,11 @@
 # Matry README
 
-This is the README for your extension "matry". After writing up a brief description, we recommend including the following sections.
+Matry is a programming language for defining design tokens.
 
 ## Features
 
-Matry is a programming language for defining design tokens.
+Currently, the only feature is basic syntax highlighting.
+LSP features will be added in the future.
 This is v0.0.1 - Matry will not be ready for public consumption until v1.0.0.
 
 ## Requirements
