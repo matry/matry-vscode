@@ -1,0 +1,33 @@
+{
+  "name": "matry",
+  "displayName": "",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.81.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "matry",
+        "aliases": [
+          "matry"
+        ],
+        "extensions": [
+          "matry"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "matry",
+        "scopeName": "source.matry",
+        "path": "./syntaxes/matry.tmLanguage.json"
+      }
+    ]
+  }
+}

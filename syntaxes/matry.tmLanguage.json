@@ -1,0 +1,107 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Matry",
+  "patterns": [
+    {
+      "name": "variable.language.matry",
+      "match": "\\btokens\\b"
+    },
+    {
+      "name": "constant.language.boolean.matry",
+      "match": "\\b(on|off)\\b"
+    },
+    {
+      "name": "entity.name.function.matry",
+      "match": "\\b[A-Za-z0-9_-]+\\b(?=\\s*(when|\\{))"
+    },
+    {
+      "name": "keyword.operator.matry",
+      "match": "\\bwhen\\b"
+    },
+    {
+      "name": "variable.other.readwrite.matry",
+      "match": "\\$[A-Za-z0-9_-]+\\b"
+    },
+    {
+      "name": "keyword.operator.matry",
+      "match": "\\bis\\b"
+    },
+    {
+      "name": "comment.line.double-slash.matry",
+      "match": "//.*"
+    },
+    {
+      "begin": "/\\*",
+      "end": "\\*/",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.comment.begin.matry"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.comment.end.matry"
+        }
+      },
+      "name": "comment.block.matry"
+    },
+    {
+      "begin": "\\{",
+      "end": "\\}",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.block.begin.matry"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.block.end.matry"
+        }
+      },
+      "name": "meta.block.matry",
+      "patterns": [
+        {
+          "name": "variable.other.constant.matry",
+          "match": "\\b[A-Za-z_][A-Za-z0-9_-]*\\b(?=\\s*:\\s*)"
+        },
+        {
+          "name": "keyword.control.matry",
+          "match": "\\b(color|text|asset|toggle|number|dimension)\\b"
+        },
+        {
+          "name": "keyword.operator.assignment.matry",
+          "match": ":"
+        },
+        {
+          "name": "string.quoted.double.matry",
+          "match": "\".*?\""
+        },
+        {
+          "name": "constant.numeric.float.matry",
+          "match": "\\b\\d+\\.\\d+\\b"
+        },
+        {
+          "name": "constant.numeric.integer.matry",
+          "match": "\\b\\d+\\b"
+        },
+        {
+          "name": "constant.other.color.rgb-value.matry",
+          "match": "\\b(#[0-9a-fA-F]+|rgba?\\(\\s*\\d+\\s*,\\s*\\d+\\s*,\\s*\\d+(,\\s*\\d+\\s*)?\\))\\b"
+        },
+        {
+          "name": "constant.other.dimension.matry",
+          "match": "\\b\\d+(px|em|rem|in|cm|mm|pt|pc)\\b"
+        },
+        {
+          "name": "string.unquoted.matry",
+          "match": "\\/.*"
+        },
+        {
+          "name": "constant.other.color.hex.matry",
+          "match": "\\#[0-9a-fA-F]+\\b"
+        }
+      ]
+    }
+  ],
+  "scopeName": "source.matry"
+}
