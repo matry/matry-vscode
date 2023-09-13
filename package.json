@@ -1,7 +1,7 @@
 {
   "name": "matry",
-  "displayName": "",
-  "description": "",
+  "displayName": "Matry",
+  "description": "Syntax highlighting for the Matry programming language",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.81.0"
