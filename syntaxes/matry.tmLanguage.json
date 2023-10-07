@@ -14,10 +14,13 @@
       "end": "\\*/"
     },
     {
-      "include": "#story_block"
+      "include": "#tokens_block"
     },
     {
-      "include": "#tokens_block"
+      "include": "#component_block"
+    },
+    {
+      "include": "#story_block"
     }
   ],
   "repository": {
@@ -116,11 +119,6 @@
         }
       ]
     },
-    "frame_component": {
-      "patterns": [
-        
-      ]
-    },
     "frame_properties": {
       "patterns": [
         {
@@ -136,6 +134,63 @@
         },
         {
           "include": "#frame_block"
+        }
+      ]
+    },
+
+    "component_block": {
+      "patterns": [
+        {
+          "name": "keyword",
+          "begin": "^component\\b",
+          "end": "}",
+          "patterns": [
+            {
+              "name": "entity.other.attribute-name",
+              "match": "([a-z|A-Z|0-9|_-]+)(?=\\s*{)"
+            },
+            {
+              "name": "keyword",
+              "begin": "^\\s*elements\\b",
+              "end": "}",
+              "patterns": [
+                {
+                  "include": "#elements_block"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "elements_block": {
+      "patterns": [
+        {
+          "begin": "^\\s*(shape|image|video|text|any|svg)\\s+([a-z|A-Z|0-9|_-]+)",
+          "captures": {
+            "1": { "name": "support.type" },
+            "2": { "name": "entity.other.attribute-name" }
+          },
+          "end": "}",
+          "patterns": [
+            {
+              "include": "#element_definition"
+            }
+          ]
+        }
+      ]
+    },
+    "element_definition": {
+      "patterns": [
+        {
+          "match": "^\\s*(shape|image|video|text|any|svg)\\s+([a-z|A-Z|0-9|_-]+)",
+          "captures": {
+              "1": { "name": "support.type" },
+              "2": { "name": "entity.other.attribute-name" }
+          }
+        },
+        {
+          "include": "#elements_block"
         }
       ]
     },
