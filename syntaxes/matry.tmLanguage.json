@@ -161,6 +161,11 @@
         },
         {
           "name": "constant.numeric",
+          "comment": "any number",
+          "match": "\\d+(\\.\\d+)?"
+        },
+        {
+          "name": "constant.numeric",
           "comment": "any dimension",
           "match": "\\d+(\\.\\d+)?(px|em|rem|%|vw|vh|vmin|vmax|cm|mm|in|pt|pc)"
         },
