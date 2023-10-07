@@ -143,13 +143,31 @@
           "end": "\\}",
           "patterns": [
             {
+              "begin": "^\\s*(style)\\s*([a-z|A-Z|0-9|_-]+)\\s*(when)?\\s*(\\$[a-z|A-Z|0-9|_-]+)?",
+              "end": "\\}",
+              "captures": {
+                "1": { "name": "keyword" },
+                "2": { "name": "entity.other.attribute-name" },
+                "3": { "name": "keyword.control.conditional" },
+                "4": { "name": "variable.parameter" }
+              },
+              "patterns": [
+                {
+                  "include": "#conditional_style_block"
+                },
+                {
+                  "include": "#component_style_block"
+                }
+              ]
+            },
+            {
               "name": "entity.other.attribute-name",
               "match": "([a-z|A-Z|0-9|_-]+)(?=\\s*{)"
             },
             {
               "name": "keyword",
               "begin": "^\\s*elements\\b",
-              "end": "}",
+              "end": "\\}",
               "patterns": [
                 {
                   "include": "#elements_block"
@@ -215,6 +233,33 @@
         }
       ]
     },
+    "component_style_block": {
+      "patterns": [
+        {
+          "include": "#style_properties"
+        },
+        {
+          "include": "#style_values"
+        }
+      ]
+    },
+    "conditional_style_block": {
+      "patterns": [
+        {
+          "begin": "^\\s*(is)\\s*(\\w+)",
+          "end": "\\}",
+          "captures": {
+            "1": { "name": "keyword.control" },
+            "2": { "name": "string.other" }
+          },
+          "patterns": [
+            {
+              "include": "#component_style_block"
+            }
+          ]
+        }
+      ]
+    },
 
     "style_types": {
       "patterns": [
@@ -228,7 +273,7 @@
       "patterns": [
         {
           "name": "support.type.property-name.css",
-          "match": "(width|height|font-size|padding|margin)"
+          "match": "(width|height|font-size|padding|margin)(?=\\s*:)"
         }
       ]
     },
