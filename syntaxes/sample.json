@@ -1,0 +1,54 @@
+
+
+        {
+          "match": "[a-zA-Z_][a-zA-Z0-9_]*",
+          "name": "entity.name.tokens.matry"
+        },
+        {
+          "match": "\\bwhen\\b",
+          "name": "keyword.control.conditional.matry"
+        },
+        {
+          "match": "\\$[a-zA-Z_][a-zA-Z0-9_]*\\.[a-zA-Z_][a-zA-Z0-9_]*",
+          "name": "variable.reference.matry"
+        },
+        {
+          "match": "\\bis\\b",
+          "name": "keyword.control.conditional.matry"
+        },
+        {
+          "match": "\\b(on|off)\\b",
+          "name": "constant.language.boolean.matry"
+        },
+        {
+          "match": "{",
+          "name": "punctuation.brace.open.matry"
+        },
+        {
+          "match": "}",
+          "name": "punctuation.brace.close.matry"
+        }
+
+
+
+        {
+          "begin": "\\btokens\\b",
+          "end": "{",
+          "name": "storage.modifier.tokens.matry",
+          "patterns": [
+            {
+              "match": "\\b[a-zA-Z_][a-zA-Z0-9_]+\\b",
+              "name": "entity.name.tokens.matry"
+            },
+            {
+              "match": "\\bwhen\\b",
+              "name": "keyword.control.conditional.matry"
+            },
+            {
+              "begin": "{",
+              "end": "}",
+              "name": "tokens.body.matry",
+              "patterns": []
+            }
+          ]
+        }

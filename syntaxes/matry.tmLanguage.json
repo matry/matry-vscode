@@ -1,107 +1,194 @@
 {
   "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
   "name": "Matry",
+  "scopeName": "source.matry",
+  "fileTypes": ["matry"],
   "patterns": [
     {
-      "name": "variable.language.matry",
-      "match": "\\btokens\\b"
-    },
-    {
-      "name": "constant.language.boolean.matry",
-      "match": "\\b(on|off)\\b"
-    },
-    {
-      "name": "entity.name.function.matry",
-      "match": "\\b[A-Za-z0-9_-]+\\b(?=\\s*(when|\\{))"
-    },
-    {
-      "name": "keyword.operator.matry",
-      "match": "\\bwhen\\b"
-    },
-    {
-      "name": "variable.other.readwrite.matry",
-      "match": "\\$[A-Za-z0-9_-]+\\b"
-    },
-    {
-      "name": "keyword.operator.matry",
-      "match": "\\bis\\b"
-    },
-    {
-      "name": "comment.line.double-slash.matry",
+      "name": "comment.line.double-slash",
       "match": "//.*"
     },
     {
+      "name": "comment.block",
       "begin": "/\\*",
-      "end": "\\*/",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.comment.begin.matry"
-        }
-      },
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.comment.end.matry"
-        }
-      },
-      "name": "comment.block.matry"
+      "end": "\\*/"
     },
     {
-      "begin": "\\{",
-      "end": "\\}",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.block.begin.matry"
-        }
-      },
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.block.end.matry"
-        }
-      },
-      "name": "meta.block.matry",
+      "include": "#story_block"
+    },
+    {
+      "include": "#tokens_block"
+    }
+  ],
+  "repository": {
+
+    "tokens_block": {
       "patterns": [
         {
-          "name": "variable.other.constant.matry",
-          "match": "\\b[A-Za-z_][A-Za-z0-9_-]*\\b(?=\\s*:\\s*)"
-        },
+          "name": "keyword",
+          "begin": "^tokens\\b",
+          "end": "}",
+          "patterns": [
+            {
+              "name": "entity.other.attribute-name",
+              "match": "([a-z|A-Z|0-9]+)(?=\\s*{)"
+            },
+            {
+              "name": "invalid",
+              "match": "howdy"
+            },
+            {
+              "include": "#token_properties"
+            },
+            {
+              "begin": "\\b([a-z|A-Z|0-9]+)(?=\\s*{)",
+              "end": "}",
+              "patterns": [
+                {
+                  "include": "#token_properties"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "token_properties": {
+      "patterns": [
         {
-          "name": "keyword.control.matry",
-          "match": "\\b(color|text|asset|toggle|number|dimension)\\b"
-        },
-        {
-          "name": "keyword.operator.assignment.matry",
+          "name": "punctuation",
           "match": ":"
         },
         {
-          "name": "string.quoted.double.matry",
-          "match": "\".*?\""
+          "name": "support.type",
+          "match": "\\b(color|text|asset|dimension|toggle)\\b"
         },
         {
-          "name": "constant.numeric.float.matry",
-          "match": "\\b\\d+\\.\\d+\\b"
+          "name": "variable.parameter",
+          "match": "\\b[a-zA-Z][a-zA-Z0-9_-]*[a-zA-Z0-9](?=\\s*:)"
         },
         {
-          "name": "constant.numeric.integer.matry",
-          "match": "\\b\\d+\\b"
+          "include": "#style_values"
+        }
+      ]
+    },
+
+    "story_block": {
+      "patterns": [
+        {
+          "name": "keyword",
+          "begin": "^story\\b",
+          "end": "}",
+          "patterns": [
+            {
+              "name": "entity.other.attribute-name",
+              "match": "(?<=story)(\\s+)(.*)(?=\\s*{)"
+            },
+            {
+              "name": "invalid",
+              "match": "howdy"
+            },
+            {
+              "name": "keyword",
+              "begin": "^\\s*frame\\b",
+              "end": "}",
+              "patterns": [
+                {
+                  "include": "#frame_block"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "frame_block": {
+      "patterns": [
+        {
+          "name": "entity.other.attribute-name",
+          "begin": "(?<=frame)(\\s+)(.*)(?=\\s*{)",
+          "end": "}",
+          "patterns": [
+            {
+              "include": "#frame_properties"
+            }
+          ]
+        }
+      ]
+    },
+    "frame_component": {
+      "patterns": [
+        
+      ]
+    },
+    "frame_properties": {
+      "patterns": [
+        {
+          "name": "variable.parameter",
+          "match": "\\b[a-zA-Z][a-zA-Z0-9_-]*[a-zA-Z0-9](?=\\s*:)"
         },
         {
-          "name": "constant.other.color.rgb-value.matry",
-          "match": "\\b(#[0-9a-fA-F]+|rgba?\\(\\s*\\d+\\s*,\\s*\\d+\\s*,\\s*\\d+(,\\s*\\d+\\s*)?\\))\\b"
+          "name": "punctuation",
+          "match": ":"
         },
         {
-          "name": "constant.other.dimension.matry",
-          "match": "\\b\\d+(px|em|rem|in|cm|mm|pt|pc)\\b"
+          "include": "#style_values"
         },
         {
-          "name": "string.unquoted.matry",
-          "match": "\\/.*"
+          "include": "#frame_block"
+        }
+      ]
+    },
+
+    "style_properties": {
+      "patterns": [
+        {
+          "name": "support.type.property-name.css",
+          "match": "(width|height|font-size|padding|margin)"
+        }
+      ]
+    },
+    "style_values": {
+      "patterns": [
+        {
+          "name": "meta.property-value",
+          "match": "(?<=: +)\\$[a-zA-Z_][a-zA-Z0-9_-]*"
         },
         {
-          "name": "constant.other.color.hex.matry",
-          "match": "\\#[0-9a-fA-F]+\\b"
+          "name": "string.unquoted.other",
+          "comment": "absolute path for an asset file",
+          "match": "/[\\w\\s\\.-]+(/[\\w\\s\\.-]+)*"
+        },
+        {
+          "name": "constant.numeric",
+          "comment": "any dimension",
+          "match": "\\d+(\\.\\d+)?(px|em|rem|%|vw|vh|vmin|vmax|cm|mm|in|pt|pc)"
+        },
+        {
+          "name": "constant.numeric",
+          "comment": "hex colors",
+          "match": "#[0-9a-fA-F]{3,4}([0-9a-fA-F]{2}){0,2}"
+        },
+        {
+          "name": "constant.numeric",
+          "comment": "rgb colors",
+          "match": "rgb\\(\\s*\\d{1,3}\\s*,\\s*\\d{1,3}\\s*,\\s*\\d{1,3}\\s*\\)|rgba\\(\\s*\\d{1,3}\\s*,\\s*\\d{1,3}\\s*,\\s*\\d{1,3}\\s*,\\s*(?:1|0(?:\\.\\d+)?)\\s*\\)"
+        },
+        {
+          "name": "constant.numeric",
+          "match": "hsla?\\(\\s*\\d{1,3}\\s*,\\s*\\d{1,3}%\\s*,\\s*\\d{1,3}%\\s*(,\\s*(?:\\d+(?:\\.\\d+)?|\\.\\d+)(%?)\\s*)?\\)"
+        },        
+        {
+          "name": "keyword.operator",
+          "comment": "catch-all for text",
+          "match": "(?<=toggle\\s+[a-zA-Z][a-zA-Z0-9_-]*[a-zA-Z0-9]\\s*:\\s*)(on|off)"
+        },
+        {
+          "name": "string.quoted.double",
+          "comment": "catch-all for text",
+          "match": "(?<=text\\s+[a-zA-Z][a-zA-Z0-9_-]*[a-zA-Z0-9]\\s*:\\s*).+$"
         }
       ]
     }
-  ],
-  "scopeName": "source.matry"
+  }
 }
