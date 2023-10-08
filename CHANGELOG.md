@@ -10,6 +10,10 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - More descriptive information in the extension marketplace
 
+### Fixed
+
+- Highlighting for switch options
+
 ## [0.0.3] - 2023-10-07
 
 ### Added
