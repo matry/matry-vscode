@@ -4,13 +4,13 @@ All notable changes to the "matry" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [0.0.3] - 2023-10-08
+## [0.0.4] - 2023-10-08
 
 ### Added
 
 - More descriptive information in the extension marketplace
 
-## [0.0.2] - 2023-10-07
+## [0.0.3] - 2023-10-07
 
 ### Added
 
