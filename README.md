@@ -1,6 +1,10 @@
 # Matry README
 
-Matry is a programming language for defining design tokens.
+Matry is a programming language for UI designers.
+By using design terminology and mental models, the language allows designers to collaborate more closely with developers.
+This extension will eventually include lots of useful utilities for designers, but as of right now it simply provides syntax highlighting.
+
+Visit [matry.design](https://matry.design) to learn more.
 
 ## Features
 
