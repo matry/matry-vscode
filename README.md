@@ -32,6 +32,18 @@ No known issues.
 
 ## Release Notes
 
+### 0.0.6
+
+Fixed various issues.
+
+### 0.0.5
+
+Fixed various issues.
+
+### 0.0.3
+
+Added base support for most language features - tokens, components, and stories.
+
 ### 0.0.1
 
 Initial release

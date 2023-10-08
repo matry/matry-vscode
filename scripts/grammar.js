@@ -80,11 +80,7 @@ export const repositories = {
         patterns: [
           {
             name: 'entity.other.attribute-name',
-            match: '(?<=story)(\\s+)(.*)(?=\\s*{)'
-          },
-          {
-            name: 'invalid',
-            match: 'howdy'
+            match: '(?<=^story)(\\s+)(.*)$'
           },
           {
             name: 'keyword',
@@ -104,7 +100,7 @@ export const repositories = {
     patterns: [
       {
         name: 'entity.other.attribute-name',
-        begin: '(?<=frame)(\\s+)(.*)(?=\\s*{)',
+        begin: '(?<=^\\s*frame)(\\s+)(.*)$',
         end: '}',
         patterns: [
           {
@@ -164,8 +160,8 @@ export const repositories = {
           },
           {
             name: 'keyword',
-            begin: '^\\s*elements\\b',
-            end: '\\}',
+            begin: '^\\s*elements\\s*{',
+            end: '}',
             patterns: [
               {
                 include: '#elements_block'
@@ -182,29 +178,25 @@ export const repositories = {
   elements_block: {
     patterns: [
       {
-        begin: '^\\s*(shape|image|video|text|any|svg)\\s+([a-z|A-Z|0-9|_-]+)',
-        captures: {
-          '1': { name: 'support.type' },
-          '2': { name: 'entity.other.attribute-name' }
-        },
-        end: '}',
-        patterns: [
-          {
-            include: '#element_definition'
-          }
-        ]
-      }
-    ]
-  },
-  element_definition: {
-    patterns: [
-      {
         match: '^\\s*(shape|image|video|text|any|svg)\\s+([a-z|A-Z|0-9|_-]+)',
         captures: {
             '1': { name: 'support.type' },
             '2': { name: 'entity.other.attribute-name' }
-        }
+        },
       },
+      {
+        begin: '{',
+        end: '}',
+        patterns: [
+          {
+            include: '#elements_block'
+          }
+        ]
+      },
+    ]
+  },
+  element_definition: {
+    patterns: [
       {
         include: '#elements_block'
       }
