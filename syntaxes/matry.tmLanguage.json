@@ -280,12 +280,22 @@
     "style_values": {
       "patterns": [
         {
-          "match": "(?:(\\w+)(\\*)?(,))+",
-          "captures": {
-            "1": { "name": "string.other" },
-            "2": { "name": "keyword.other" },
-            "3": { "name": "markup.punctuation.list.beginning" }
-          }
+          "begin": "(?<=: +)(\\w+(\\*)?)(\\s*)?(?=,)",
+          "end": "(\\n)",
+          "beginCaptures": {
+              "1": { "name": "string.other" },
+              "2": { "name": "entity" }
+          },
+          "patterns": [
+            {
+                "match": "\\s*(,)\\s*(\\w+(\\*)?)",
+                "captures": {
+                    "1": { "name": "markup.punctuation.list.beginning" },
+                    "2": { "name": "string.other" },
+                    "3": { "name": "entity.name.function" }
+                }
+            }
+          ]
         },
         {
           "name": "meta.property-value",
@@ -319,7 +329,7 @@
         {
           "name": "constant.numeric",
           "match": "hsla?\\(\\s*\\d{1,3}\\s*,\\s*\\d{1,3}%\\s*,\\s*\\d{1,3}%\\s*(,\\s*(?:\\d+(?:\\.\\d+)?|\\.\\d+)(%?)\\s*)?\\)"
-        },        
+        },
         {
           "name": "keyword.operator",
           "comment": "catch-all for text",
