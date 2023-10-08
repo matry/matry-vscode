@@ -25,7 +25,7 @@
       "include": "#story_block"
     }
   ],
-  "repositories": {
+  "repository": {
     "tokens_block": {
       "patterns": [
         {

@@ -12,7 +12,7 @@ const grammar = {
   scopeName: 'source.matry',
   fileTypes: ['matry'],
   patterns,
-  repositories,
+  repository: repositories,
 }
 
 const grammarJson = JSON.stringify(grammar)
