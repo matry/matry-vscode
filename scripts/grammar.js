@@ -5,6 +5,10 @@ export const patterns = [
     include: '#comments',
   },
   {
+    name: 'invalid',
+    match: '\\:',
+  },
+  {
     comment: 'tokens header',
     match: '^(tokens)\\s*([a-z|A-Z|0-9]+)?',
     captures: {
@@ -58,6 +62,14 @@ export const patterns = [
     ],
   },
   {
+    comment: 'conditional header',
+    match: '^\\s+(is)\\s+([a-zA-Z0-9_-]+)',
+    captures: {
+      '1': { name: 'keyword.control' },
+      '2': { name: 'entity.name.function' },
+    },
+  },
+  {
     comment: 'variants header',
     name: 'keyword',
     match: '^\\s*variants',
@@ -83,7 +95,7 @@ export const patterns = [
     name: 'keyword.control',
     match: '^\\s+(\\.)([a-zA-Z0-9_-]+)',
     captures: {
-      '1': { name: 'markup.punctuation' },
+      '1': { name: 'keyword.operator' },
       '2': { name: 'entity.other.attribute-name' },
     },
   },
@@ -127,7 +139,11 @@ export const repositories = {
   style_values: {
     patterns: [
       {
-        begin: '(?<=:\\s+)(\\w+(\\*)?)(\\s*)?(?=,)',
+        name: 'keyword.operator',
+        match: '\\:',
+      },
+      {
+        begin: '(?<=:\\s+)(\\w+(\\*)?)(\\s*)?(?=\\,)',
         end: '$',
         beginCaptures: {
             '1': { name: 'string.other' },
@@ -135,9 +151,9 @@ export const repositories = {
         },
         patterns: [
           {
-              match: '\\s*(,)\\s*(\\w+(\\*)?)',
+              match: '\\s*(\\,)\\s*(\\w+(\\*)?)',
               captures: {
-                  '1': { name: 'markup.punctuation.list.beginning' },
+                  '1': { name: 'keyword.operator' },
                   '2': { name: 'string.other' },
                   '3': { name: 'entity.name.function' }
               }
@@ -146,7 +162,7 @@ export const repositories = {
       },
       {
         name: 'variable.parameter',
-        match: '(?<=: +)\\$[a-zA-Z_][a-zA-Z0-9_-]*'
+        match: '(?<=: +)\\$\\w+([-_.]\\w+)*'
       },
       {
         comment: 'file paths',

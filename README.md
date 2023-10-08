@@ -32,6 +32,10 @@ No known issues.
 
 ## Release Notes
 
+### 0.0.8
+
+Fixes minor issues with semicolon removal.
+
 ### 0.0.7
 
 Removed the need for semicolons in nested blocks.
